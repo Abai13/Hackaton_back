@@ -1,0 +1,1 @@
+web: gunicorn Hackaton_back.wsgi
