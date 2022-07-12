@@ -64,3 +64,7 @@ class User(AbstractBaseUser):
             recipient_list=[self.email], 
             fail_silently=False
         )
+
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'

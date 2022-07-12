@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Django==4.0.5
 djangorestframework==3.13.1
 psycopg2-binary==2.9.3
@@ -13,19 +12,3 @@ drf-yasg
 gunicorn
 django-cors-headers
 whitenoise
-=======
-Django
-djangorestframework
-psycopg2-binary
-Pillow
-
-django-filter
-python-decouple
-djangorestframework_simplejwt
-python-slugify
-wheel
-drf-yasg
-
-gunicorn
-django-cors-headers
->>>>>>> 38dc4253b51c98987a15277a9daf20db7679f7a9

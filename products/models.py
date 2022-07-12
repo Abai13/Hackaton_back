@@ -15,8 +15,8 @@ class Brand(models.Model):
         super(Brand, self).save(*args, **kwargs)
     
     class Meta:
-        verbose_name = 'Брэнд'
-        verbose_name_plural = 'Брэнды'
+        verbose_name = 'Brand'
+        verbose_name_plural = 'Brands'
 
 
 class SneakersType(models.Model):
@@ -32,16 +32,11 @@ class SneakersType(models.Model):
         super(SneakersType, self).save(*args, **kwargs)
     
     class Meta:
-        verbose_name = 'Тип'
-        verbose_name_plural = 'Типы'
+        verbose_name = 'Type'
+        verbose_name_plural = 'Types'
 
 
 class Product(models.Model):
-    MALE_CHOICE = (
-        ('all', 'Все'),
-        ('male', 'Мужские'),
-        ('female', 'Женские'),
-    )
 
     SIZE_CHOICE = (
         ('36', '36'),
@@ -53,6 +48,12 @@ class Product(models.Model):
         ('42', '42'),
         ('43', '43'),
         ('44', '44'),
+    )
+
+    MALE_CHOICE = (
+        ('all', 'Все'),
+        ('male', 'Мужские'),
+        ('female', 'Женские'),
     )
 
     title = models.CharField(max_length=155)
@@ -68,8 +69,8 @@ class Product(models.Model):
         return self.title
     
     class Meta:
-        verbose_name = 'Кроссовки'
-        verbose_name_plural = 'Кроссовки'
+        verbose_name = 'Sneakers'
+        verbose_name_plural = 'Sneakers'
 
 
 class Comment(models.Model):
@@ -92,6 +93,6 @@ class Comment(models.Model):
         return f'Comment from {self.author.title} to {self.product}'
 
     class Meta:
-        verbose_name = 'Комментарий'
-        verbose_name_plural = 'Комментарии'
+        verbose_name = 'Coment'
+        verbose_name_plural = 'Coments'
         ordering = ['-create_date']
