@@ -51,6 +51,7 @@ class Product(models.Model):
         ('45', '45'),
         ('46', '46'),
         ('47', '47'),
+        ('48', '48'),
     )
 
     MALE_CHOICE = (
