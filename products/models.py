@@ -73,26 +73,29 @@ class Product(models.Model):
         verbose_name_plural = 'Sneakers'
 
 
-class Comment(models.Model):
-    RATING_CHOICE = (
-        (1, '⭐️'),
-        (2, '⭐️⭐️'),
-        (3, '⭐️⭐️⭐️'),
-        (4, '⭐️⭐️⭐️⭐️'),
-        (5, '⭐️⭐️⭐️⭐️⭐️'),
-    )
 
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='review')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='review')
-    text = models.TextField()
-    rating = models.CharField(max_length=5, choices=RATING_CHOICE, blank=True, null=True)
-    create_date = models.DateTimeField(auto_now_add=True)
-    update_date = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return f'Comment from {self.author.title} to {self.product}'
 
-    class Meta:
-        verbose_name = 'Coment'
-        verbose_name_plural = 'Coments'
-        ordering = ['-create_date']
+# class Comment(models.Model):
+#     RATING_CHOICE = (
+#         (1, '⭐️'),
+#         (2, '⭐️⭐️'),
+#         (3, '⭐️⭐️⭐️'),
+#         (4, '⭐️⭐️⭐️⭐️'),
+#         (5, '⭐️⭐️⭐️⭐️⭐️'),
+#     )
+
+#     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='review')
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='review')
+#     text = models.TextField()
+#     rating = models.CharField(max_length=5, choices=RATING_CHOICE, blank=True, null=True)
+#     create_date = models.DateTimeField(auto_now_add=True)
+#     update_date = models.DateTimeField(auto_now=True)
+
+#     def __str__(self):
+#         return f'Comment from {self.author.title} to {self.product}'
+
+#     class Meta:
+#         verbose_name = 'Coment'
+#         verbose_name_plural = 'Coments'
+#         ordering = ['-create_date']
