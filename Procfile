@@ -1,1 +1,1 @@
-web: gunicorn Hackaton_back.wsgi
+web: gunicorn shop.wsgi
