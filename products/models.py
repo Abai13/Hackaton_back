@@ -39,6 +39,7 @@ class SneakersType(models.Model):
 class Product(models.Model):
 
     SIZE_CHOICE = (
+        ('35', '35'),
         ('36', '36'),
         ('37', '37'),
         ('38', '38'),
@@ -49,6 +50,9 @@ class Product(models.Model):
         ('43', '43'),
         ('44', '44'),
         ('45', '45'),
+        ('46', '46'),
+        ('47', '47'),
+
     )
 
     MALE_CHOICE = (
@@ -59,13 +63,13 @@ class Product(models.Model):
 
     title = models.CharField(max_length=155)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='product')
-    sneakers_type = models.ForeignKey(SneakersType, on_delete=models.CASCADE, related_name='product')
+    category = models.ForeignKey(SneakersType, on_delete=models.CASCADE, related_name='product')
     male = models.CharField(max_length=20, choices=MALE_CHOICE, default='Все')
-    size = models.CharField(max_length=20, choices=SIZE_CHOICE)
+    size = models.IntegerField(choices=SIZE_CHOICE)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='products', null=True, blank=True)
-
+   
     def __str__(self):
         return self.title
     
@@ -73,27 +77,3 @@ class Product(models.Model):
         verbose_name = 'Sneakers'
         verbose_name_plural = 'Sneakers'
 
-
-# class Comment(models.Model):
-#     RATING_CHOICE = (
-#         (1, '⭐️'),
-#         (2, '⭐️⭐️'),
-#         (3, '⭐️⭐️⭐️'),
-#         (4, '⭐️⭐️⭐️⭐️'),
-#         (5, '⭐️⭐️⭐️⭐️⭐️'),
-#     )
-
-#     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='review')
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='review')
-#     text = models.TextField()
-#     rating = models.CharField(max_length=5, choices=RATING_CHOICE, blank=True, null=True)
-#     create_date = models.DateTimeField(auto_now_add=True)
-#     update_date = models.DateTimeField(auto_now=True)
-
-#     def __str__(self):
-#         return f'Comment from {self.author.title} to {self.product}'
-
-    # class Meta:
-    #     verbose_name = 'Coment'
-    #     verbose_name_plural = 'Coments'
-    #     ordering = ['-create_date']
