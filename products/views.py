@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
+from products.filters import ProductPriceFilter
+
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
 
