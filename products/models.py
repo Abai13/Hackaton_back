@@ -52,7 +52,6 @@ class Product(models.Model):
         (45, '45'),
         (46, '46'),
         (47, '47'),
-
     )
 
     GENDER_CHOICE = (
