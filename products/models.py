@@ -76,3 +76,31 @@ class Product(models.Model):
         verbose_name = 'Sneakers'
         verbose_name_plural = 'Sneakers'
 
+
+class CommentRating(models.Model):
+    rating_choices = (
+    (1, '⭐️'),
+    (2, '⭐️⭐️'),
+    (3, '⭐️⭐️⭐️'),
+    (4, '⭐️⭐️⭐️⭐️'),
+    (5, '⭐️⭐️⭐️⭐️⭐️'),
+    )
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='comments')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments')
+    text = models.TextField(blank=True, null=True)
+    rating = models.IntegerField(choices=rating_choices, blank=True, null=True)
+    create_date = models.DateTimeField(auto_now_add=True)
+    update_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        if self.rating and self.text:
+            return f'Комментарий и рейтинг от {self.author.name} к {self.product}'
+        elif self.rating:
+            return f'Рейтинг от {self.author.name} к {self.product}'
+        elif self.text:
+            return f'Комментарий от {self.author.name} к {self.product}'
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+        ordering = ['-create_date']
