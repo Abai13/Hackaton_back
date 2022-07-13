@@ -24,7 +24,7 @@ schema_view = get_schema_view(
    openapi.Info(
       title="Shop API",
       default_version='v1',
-      description="This shop API",
+      description="There is swagger",
    ),
    public=True,
    permission_classes=[permissions.AllowAny],

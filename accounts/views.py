@@ -6,6 +6,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.permissions import IsAuthenticated
+from drf_yasg.utils import swagger_auto_schema
 
 from .serializers import (
     RegistrationSerializer, 
@@ -20,6 +21,8 @@ User = get_user_model()
 
 
 class RegistrationView(APIView):
+
+    @swagger_auto_schema(request_body=RegistrationSerializer)
     def post(self, request):
         data = request.data
         serializer = RegistrationSerializer(data=data)
@@ -29,6 +32,8 @@ class RegistrationView(APIView):
 
 
 class ActivationView(APIView):
+    
+    @swagger_auto_schema(LoginSerializer)
     def get(self, request, activation_code):
         try:
             user = User.objects.get(activation_code=activation_code)
@@ -51,6 +56,7 @@ class UpdateTokenView(TokenRefreshView):
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
+    @swagger_auto_schema(request_body=LoginSerializer)
     def post(self, request):
         token = request.data.get('refresh_token')
         if token is not None:
@@ -62,6 +68,8 @@ class LogoutView(APIView):
 
 
 class RestorePasswordView(APIView):
+    
+    @swagger_auto_schema(request_body=RestorePasswordSerializer)
     def post(self, request):
         data = request.data
         serializer = RestorePasswordSerializer(data=data)
@@ -71,6 +79,7 @@ class RestorePasswordView(APIView):
 
 
 class RestorePasswordCompleteView(APIView):
+    @swagger_auto_schema(request_body=RestorePasswordCompleteSerializer)
     def post(self, request):
         data = request.data
         serializer = RestorePasswordCompleteSerializer(data=data)
@@ -82,6 +91,7 @@ class RestorePasswordCompleteView(APIView):
 class ChangePasswordView(APIView):
     permission_classes = [IsAuthenticated]
 
+    @swagger_auto_schema(request_body=ChangePasswordSerializer)
     def post(self, request):
         data = request.data
         serializer = ChangePasswordSerializer(data=data, context={'request': request})
