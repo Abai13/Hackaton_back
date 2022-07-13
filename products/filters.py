@@ -8,4 +8,4 @@ class ProductPriceFilter(filters.FilterSet):
 
     class Meta:
         model = Product
-        fields = ['brand', 'male', 'size']
+        fields = ['category']
