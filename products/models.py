@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from slugify import slugify
 
 class Brand(models.Model):
-    title = models.CharField(max_length=150, primary_key=True)
+    title = models.CharField(max_length=150)
     slug = models.SlugField(max_length=150, blank=True)
 
     def __str__(self):
@@ -20,7 +20,7 @@ class Brand(models.Model):
 
 
 class SneakersType(models.Model):
-    title = models.CharField(max_length=150)
+    title = models.CharField(max_length=150, primary_key=True)
     slug = models.SlugField(max_length=150, blank=True)
 
     def __str__(self):
@@ -39,6 +39,7 @@ class SneakersType(models.Model):
 class Product(models.Model):
 
     SIZE_CHOICE = (
+        ('35', '35'),
         ('36', '36'),
         ('37', '37'),
         ('38', '38'),
@@ -51,7 +52,7 @@ class Product(models.Model):
         ('45', '45'),
         ('46', '46'),
         ('47', '47'),
-        ('48', '48'),
+
     )
 
     MALE_CHOICE = (
@@ -68,7 +69,7 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='products', null=True, blank=True)
-
+   
     def __str__(self):
         return self.title
     
