@@ -33,7 +33,6 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     activation_code = models.CharField(max_length=20, blank=True)
-    # username = None
 
     objects = UserManager()
     USERNAME_FIELD = 'email'
@@ -56,15 +55,18 @@ class User(AbstractBaseUser):
         return code
 
     def send_activation_code(self):
-        activation_link = f'http://127.0.0.1:8000/account/activation/{self.activation_code}'
-        send_mail(
-            'Account activation', 
-            message=activation_link, 
-            from_email=settings.EMAIL_HOST_USER, 
-            recipient_list=[self.email], 
-            fail_silently=False
-        )
+        # TODO: change activations link
+        activation_link = f'http://localhost:8000/account/activation/{self.activation_code}'
+    
+        send_mail(subject='Activation',
+                message=activation_link,
+                from_email=settings.EMAIL_HOST,
+                recipient_list=[self.email],
+                fail_silently=False)
 
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
+
+
+

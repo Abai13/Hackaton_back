@@ -10,20 +10,19 @@ User = get_user_model()
 class RegistrationSerializer(serializers.Serializer):
     email = serializers.EmailField()
     name = serializers.CharField()
-    password = serializers.CharField(min_length=8)
-    password_confirm = serializers.CharField(min_length=8)
+    password = serializers.CharField(min_length=6)
+    password_confirm = serializers.CharField(min_length=6)
 
     def validate_email(self, email):
         if User.objects.filter(email=email).exists():
             raise serializers.ValidationError('Почта уже занята')
         return email
-    
-    # в attrs прилетают все заполненные поля: email, name, password, password_confirm
+
     def validate(self, attrs):
-        pass1 = attrs.get('password')
-        pass2 = attrs.pop('password_confirm')
-        if pass1 != pass2:
-            raise serializers.ValidationError('Пароль не совпадают')
+        password = attrs.get('password')
+        password_confirm = attrs.pop('password_confirm')
+        if password != password_confirm:
+            raise serializers.ValidationError('Пароли не совподают')
         return super().validate(attrs)
 
     def create(self):

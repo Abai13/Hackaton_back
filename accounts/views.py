@@ -1,3 +1,4 @@
+from telnetlib import STATUS
 from django.contrib.auth import get_user_model
 from django.http import Http404
 from rest_framework.views import APIView
@@ -6,7 +7,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.permissions import IsAuthenticated
-from drf_yasg.utils import swagger_auto_schema
+from drf_yasg.utils import swagger_auto_schema 
+
 
 from .serializers import (
     RegistrationSerializer, 
@@ -28,8 +30,7 @@ class RegistrationView(APIView):
         serializer = RegistrationSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             serializer.create()
-            return Response('Регистрация прошла успешно')
-
+            return Response('Регистрация прошла успешна')
 
 class ActivationView(APIView):
     
