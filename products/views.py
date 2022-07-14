@@ -7,8 +7,8 @@ from rest_framework import permissions
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter 
 
-from .models import Product, CommentRating, Image, SneakersType, Brand
-from .serializers import ProductSerializer, ReviewSerializer, ImageSerializer, BrandSerializer, SnekersTypeSerializer
+from .models import Product, CommentRating, Image, Category, Brand
+from .serializers import ProductSerializer, ReviewSerializer, ImageSerializer, BrandSerializer, CategorySerializer
 from .permissions import IsAuthor
 
 from products.filters import ProductPriceFilter
@@ -56,9 +56,9 @@ class ImageView(ModelViewSet):
         return super().get_permissions()
 
 
-class SneakersTypeViewSet(ModelViewSet):
-    queryset = SneakersType.objects.all()
-    serializer_class = SnekersTypeSerializer
+class CategoryViewSet(ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:

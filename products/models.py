@@ -19,7 +19,7 @@ class Brand(models.Model):
         verbose_name_plural = 'Brands'
 
 
-class SneakersType(models.Model):
+class Category(models.Model):
     title = models.CharField(max_length=150, primary_key=True)
     slug = models.SlugField(max_length=150, blank=True)
 
@@ -29,11 +29,11 @@ class SneakersType(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
-        super(SneakersType, self).save(*args, **kwargs)
+        super(Category, self).save(*args, **kwargs)
     
     class Meta:
-        verbose_name = 'Type'
-        verbose_name_plural = 'Types'
+        verbose_name = 'Category'
+        verbose_name_plural = 'Сategories'
 
 
 class Product(models.Model):
@@ -62,7 +62,7 @@ class Product(models.Model):
 
     title = models.CharField(max_length=155)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='product',blank=True)
-    category = models.ForeignKey(SneakersType, on_delete=models.CASCADE, related_name='product')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product')
     gender = models.CharField(max_length=20, choices=GENDER_CHOICE, default='Все')
     size = models.IntegerField(choices=SIZE_CHOICE, blank=True)
     description = models.TextField()
