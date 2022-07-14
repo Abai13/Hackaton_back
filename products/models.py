@@ -61,10 +61,10 @@ class Product(models.Model):
     )
 
     title = models.CharField(max_length=155)
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='product')
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='product',blank=True)
     category = models.ForeignKey(SneakersType, on_delete=models.CASCADE, related_name='product')
     gender = models.CharField(max_length=20, choices=GENDER_CHOICE, default='Все')
-    size = models.IntegerField(choices=SIZE_CHOICE)
+    size = models.IntegerField(choices=SIZE_CHOICE, blank=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='products', null=True, blank=True)
