@@ -30,7 +30,7 @@ class ProductViewSet(ModelViewSet):
         if self.action in ['list', 'retrieve']:
             self.permission_classes = [permissions.AllowAny]
         elif self.action in ['destroy', 'update', 'partial_update', 'create']:
-            self.permission_classes = [permissions.IsAdminUser]
+            self.permission_classes = [permissions.AllowAny]
         return super().get_permissions()
 
 
