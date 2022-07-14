@@ -37,7 +37,7 @@ class RegistrationSerializer(serializers.Serializer):
 
 class LoginSerializer(TokenObtainPairSerializer):
     email = serializers.EmailField()
-    password = serializers.CharField(min_length=8)
+    password = serializers.CharField(min_length=6)
 
     def validate_email(self, email):
         if not User.objects.filter(email=email).exists():
