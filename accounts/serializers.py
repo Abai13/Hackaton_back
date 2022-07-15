@@ -31,10 +31,6 @@ class RegistrationSerializer(serializers.Serializer):
         user.send_activation_code()
 
 
-# class ActivationSerializer(serializers.Serializer):
-#     ...
-
-
 class LoginSerializer(TokenObtainPairSerializer):
     email = serializers.EmailField()
     password = serializers.CharField(min_length=6)
