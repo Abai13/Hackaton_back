@@ -62,7 +62,7 @@ class Product(models.Model):
 
     title = models.CharField(max_length=155)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='product',blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product',blank=True)
     gender = models.CharField(max_length=20, choices=GENDER_CHOICE, default='Все')
     size = models.IntegerField(choices=SIZE_CHOICE, blank=True)
     description = models.TextField()
