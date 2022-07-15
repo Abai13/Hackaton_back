@@ -4,7 +4,7 @@ from slugify import slugify
 
 class Brand(models.Model):
     title = models.CharField(max_length=150)
-    slug = models.SlugField(max_length=150, blank=True)
+    slug = models.SlugField(max_length=150, blank=True, primary_key=True)
 
     def __str__(self):
         return self.title
@@ -20,8 +20,8 @@ class Brand(models.Model):
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=150, primary_key=True)
-    slug = models.SlugField(max_length=150, blank=True)
+    title = models.CharField(max_length=150)
+    slug = models.SlugField(max_length=150, blank=True, primary_key=True)
 
     def __str__(self):
         return self.title
@@ -63,7 +63,7 @@ class Product(models.Model):
     title = models.CharField(max_length=155)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='product',blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product',blank=True)
-    gender = models.CharField(max_length=20, choices=GENDER_CHOICE, default='Все')
+    gender = models.CharField(max_length=20, choices=GENDER_CHOICE, default='Все', blank=True)
     size = models.IntegerField(choices=SIZE_CHOICE, blank=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
