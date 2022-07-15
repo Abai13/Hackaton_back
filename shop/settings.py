@@ -214,10 +214,9 @@ SWAGGER_SETTINGS = {
 }
 
 
-CORS_ALLOW_ALL_ORIGINS: bool= True
 
-# CORS_ALLOWED_ORIGINS =  [
-#     'http://localhost:3000',
-#     'http://localhost:3001',
-#     'http://localhost:3002',
-#     ]
+CORS_ALLOWED_ORIGINS =  [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://localhost:3002',
+    ]
