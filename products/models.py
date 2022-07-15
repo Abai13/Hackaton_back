@@ -143,5 +143,3 @@ class Favorites(models.Model):
         verbose_name = 'Favorite'
         verbose_name_plural = 'Favorites'
 
-
-        
