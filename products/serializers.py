@@ -26,7 +26,7 @@ class ProductSerializer(serializers.ModelSerializer):
         rep['favorites'] = favorites
         
         if rating:
-            rep['rating'] = round((sum(rating) / sum(rating)))
+            rep['rating'] = round(((rating) / (rating)))
             return rep
         else:
             rep['rating'] = None
