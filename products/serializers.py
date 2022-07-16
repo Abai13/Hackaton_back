@@ -25,12 +25,12 @@ class ProductSerializer(serializers.ModelSerializer):
         favorites = sum([dict(i)['favorites'] for i in rep['favorites']])
         rep['favorites'] = favorites
         
-        if rating:
-            rep['rating'] = round((sum(rating) / len(rating)), 2)
-            return rep
-        else:
-            rep['rating'] = None
-            return rep
+        # if rating:
+        #     rep['rating'] = round((sum(rating) / len(rating)), 2)
+        #     return rep
+        # else:
+        #     rep['rating'] = None
+        #     return rep
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -91,4 +91,3 @@ class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
         fields = ['title']
-        
