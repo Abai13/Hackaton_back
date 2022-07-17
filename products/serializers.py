@@ -18,13 +18,10 @@ class ProductSerializer(serializers.ModelSerializer):
         rep['favorites'] = FavoritesSerializer(instance.favorites.all(), many=True).data
         
         rating = [dict(i)['rating'] for i in rep['rating']]
-        
         like = sum([dict(i)['like'] for i in rep['like']])
         rep['like'] = like
-        
         favorites = sum([dict(i)['favorites'] for i in rep['favorites']])
         rep['favorites'] = favorites
-        
         if rating:
             rep['rating'] = round((sum(rating) / len(rating)), 2)
             return rep
