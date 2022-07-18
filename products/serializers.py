@@ -4,6 +4,7 @@ from rest_framework import serializers
 from .models import Product, CommentRating, Image, Brand, Category, Like, Favorites
 
 
+
 class ReviewSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.email')
 
@@ -83,9 +84,9 @@ class ProductSerializer(serializers.ModelSerializer):
         favorites = sum([dict(i)['favorites'] for i in rep['favorites']])
         rep['favorites'] = favorites
         
-        if rating:
+        try:
             rep['rating'] = round((sum(rating) / len(rating)), 2)
             return rep
-        else:
+        except:
             rep['rating'] = None
             return rep
