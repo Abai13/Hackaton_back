@@ -8,8 +8,8 @@ from rest_framework.decorators import action
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter 
 
-from .models import Product, CommentRating, Image, Category, Brand, Like, Favorites
-from .serializers import ProductSerializer, ReviewSerializer, ImageSerializer, BrandSerializer, CategorySerializer, LikeSerializer, FavoritesSerializer
+from .models import Product, CommentRating, Category, Brand, Like, Favorites
+from .serializers import ProductSerializer, ReviewSerializer, BrandSerializer, CategorySerializer, LikeSerializer, FavoritesSerializer
 from .permissions import IsAuthor
 
 from products.filters import ProductPriceFilter
@@ -44,10 +44,10 @@ class CommentViewSet(ModelViewSet):
             self.permission_classes = [IsAuthor]
         return super().get_permissions()
 
-@swagger_auto_schema(request_body=ImageSerializer)
-class ImageView(ModelViewSet):
-    queryset = Image.objects.all()
-    serializer_class = ImageSerializer
+# @swagger_auto_schema(request_body=ImageSerializer)
+# class ImageView(ModelViewSet):
+#     queryset = Image.objects.all()
+#     serializer_class = ImageSerializer
 
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:

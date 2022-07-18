@@ -1,17 +1,17 @@
 from django.contrib import admin
-from products.models import Brand, Product, Category, CommentRating, Image, Like, Favorites
+from products.models import Brand, Product, Category, CommentRating, Like, Favorites
 
 
-class ProductImageInLine(admin.TabularInline):
-    model = Image
-    max_num = 10
-    min_num = 1
+# class ProductImageInLine(admin.TabularInline):
+#     # model = Image
+#     max_num = 10
+#     min_num = 1
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    # model = Product
-    inlines = [ProductImageInLine, ]
+    model = Product
+    # inlines = [ProductImageInLine, ]
 
 
 # admin.site.register(Product)

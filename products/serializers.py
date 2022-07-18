@@ -1,8 +1,34 @@
 from multiprocessing import context
 from rest_framework import serializers
 
-from .models import Product, CommentRating, Image, Brand, Category, Like, Favorites
+from .models import Product, CommentRating, Brand, Category, Like, Favorites
 
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['rating'] = ReviewSerializer(instance.comments.all(), many=True).data
+        rep['comments'] = ReviewSerializer(instance.comments.all(), many=True).data
+        # rep['image'] = ImageSerializer(instance.boots_image.all(), many=True, context=self.context).data
+        rep['like'] = LikeSerializer(instance.like.all(), many=True).data
+        rep['favorites'] = FavoritesSerializer(instance.favorites.all(), many=True).data
+        
+        rating = [dict(i)['rating'] for i in rep['rating']]
+        like = sum([dict(i)['like'] for i in rep['like']])
+        rep['like'] = like
+        favorites = sum([dict(i)['favorites'] for i in rep['favorites']])
+        rep['favorites'] = favorites
+        
+        try:
+            rep['rating'] = round((sum(rating) / len(rating)), 2)
+            return rep
+        except:
+            rep['rating'] = None
+            return rep
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -20,26 +46,26 @@ class ReviewSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
-class ImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Image
-        fields =  ['boots', 'image', 'id']
+# class ImageSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Image
+#         fields =  ['boots', 'image', 'id']
 
-    def get_image_url(self, obj):
-        if obj.image:
-            url = obj.image.url
-            request = self.context.get('request')
-            if request is not None:
-                url = request.build_absolute_uri(url)
-        else:
-            url = ''
-        return url
+#     def get_image_url(self, obj):
+#         if obj.image:
+#             url = obj.image.url
+#             request = self.context.get('request')
+#             if request is not None:
+#                 url = request.build_absolute_uri(url)
+#         else:
+#             url = ''
+#         return url
 
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['image'] = self.get_image_url(instance)
+#     def to_representation(self, instance):
+#         representation = super().to_representation(instance)
+#         representation['image'] = self.get_image_url(instance)
 
-        return representation
+#         return representation
 
 class FavoritesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -63,30 +89,3 @@ class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
         fields = ['title']
-
-
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = '__all__'
-
-    def to_representation(self, instance):
-        rep = super().to_representation(instance)
-        rep['rating'] = ReviewSerializer(instance.comments.all(), many=True).data
-        rep['comments'] = ReviewSerializer(instance.comments.all(), many=True).data
-        rep['image'] = ImageSerializer(instance.boots_image.all(), many=True, context=self.context).data
-        rep['like'] = LikeSerializer(instance.like.all(), many=True).data
-        rep['favorites'] = FavoritesSerializer(instance.favorites.all(), many=True).data
-        
-        rating = [dict(i)['rating'] for i in rep['rating']]
-        like = sum([dict(i)['like'] for i in rep['like']])
-        rep['like'] = like
-        favorites = sum([dict(i)['favorites'] for i in rep['favorites']])
-        rep['favorites'] = favorites
-        
-        try:
-            rep['rating'] = round((sum(rating) / len(rating)), 2)
-            return rep
-        except:
-            rep['rating'] = None
-            return rep
