@@ -7,7 +7,7 @@ from .views import ProductViewSet, CommentViewSet, BrandViewSet, CategoryViewSet
 router = DefaultRouter()
 router.register('products', ProductViewSet, 'list')
 router.register('comments', CommentViewSet)
-# router.register('image', ImageView)
+# router.register('image', ImageView) # для загрузки большего кол-во изображений
 router.register('brand', BrandViewSet)
 router.register('category', CategoryViewSet)
 router.register('favorites', FavoritesViewSet)

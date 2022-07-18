@@ -107,6 +107,7 @@ class CommentRating(models.Model):
         ordering = ['-create_date']
 
 
+# для загрузки большего кол-во изображений
 # class Image(models.Model):
 #     boots = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='boots_image')
 #     image = models.ImageField(upload_to='products')

@@ -13,7 +13,7 @@ class ProductSerializer(serializers.ModelSerializer):
         rep = super().to_representation(instance)
         rep['rating'] = ReviewSerializer(instance.comments.all(), many=True).data
         rep['comments'] = ReviewSerializer(instance.comments.all(), many=True).data
-        # rep['image'] = ImageSerializer(instance.boots_image.all(), many=True, context=self.context).data
+        # rep['image'] = ImageSerializer(instance.boots_image.all(), many=True, context=self.context).data # для загрузки большего кол-во изображений
         rep['like'] = LikeSerializer(instance.like.all(), many=True).data
         rep['favorites'] = FavoritesSerializer(instance.favorites.all(), many=True).data
         

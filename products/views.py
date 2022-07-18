@@ -44,6 +44,7 @@ class CommentViewSet(ModelViewSet):
             self.permission_classes = [IsAuthor]
         return super().get_permissions()
 
+# для загрузки большего кол-во изображений
 # @swagger_auto_schema(request_body=ImageSerializer)
 # class ImageView(ModelViewSet):
 #     queryset = Image.objects.all()
