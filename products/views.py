@@ -31,7 +31,7 @@ class ProductViewSet(ModelViewSet):
         if self.action in ['list', 'retrieve']:
             self.permission_classes = [permissions.AllowAny]
         elif self.action in ['destroy', 'update', 'partial_update', 'create']:
-            self.permission_classes = [permissions.AllowAny]
+            self.permission_classes = [permissions.IsAdminUser]
         return super().get_permissions()
 
 @swagger_auto_schema(request_body=ReviewSerializer)
@@ -54,7 +54,7 @@ class CommentViewSet(ModelViewSet):
         if self.action in ['list', 'retrieve']:
             self.permission_classes = [permissions.AllowAny]
         elif self.action in ['destroy', 'update', 'partial_update', 'create']:
-            self.permission_classes = [permissions.AllowAny]
+            self.permission_classes = [permissions.IsAdminUser]
         return super().get_permissions()
 
 @swagger_auto_schema(request_body=CategorySerializer)
@@ -66,7 +66,7 @@ class CategoryViewSet(ModelViewSet):
         if self.action in ['list', 'retrieve']:
             self.permission_classes = [permissions.AllowAny]
         elif self.action in ['destroy', 'update', 'partial_update', 'create']:
-            self.permission_classes = [permissions.AllowAny]
+            self.permission_classes = [permissions.IsAdminUser]
         return super().get_permissions()
 
 
@@ -79,7 +79,7 @@ class BrandViewSet(ModelViewSet):
         if self.action in ['list', 'retrieve']:
             self.permission_classes = [permissions.AllowAny]
         elif self.action in ['destroy', 'update', 'partial_update', 'create']:
-            self.permission_classes = [permissions.AllowAny]
+            self.permission_classes = [permissions.IsAdminUser]
         return super().get_permissions()
 
 
