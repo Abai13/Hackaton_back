@@ -8,8 +8,8 @@ from rest_framework.decorators import action
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter 
 
-from .models import Product, CommentRating, Category, Brand, Like, Favorites
-from .serializers import ProductSerializer, ReviewSerializer, BrandSerializer, CategorySerializer, LikeSerializer, FavoritesSerializer
+from .models import Product, CommentRating, Category, Brand, Like, Favorites #Image
+from .serializers import ProductSerializer, ReviewSerializer, BrandSerializer, CategorySerializer, LikeSerializer, FavoritesSerializer #ImageSerializer
 from .permissions import IsAuthor
 
 from products.filters import ProductPriceFilter

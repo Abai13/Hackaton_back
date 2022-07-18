@@ -1,5 +1,5 @@
 from django.contrib import admin
-from products.models import Brand, Product, Category, CommentRating, Like, Favorites
+from products.models import Brand, Product, Category, CommentRating, Like, Favorites #Image
 
 
 # class ProductImageInLine(admin.TabularInline):
