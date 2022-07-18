@@ -13,3 +13,4 @@ gunicorn
 django-cors-headers
 whitenoise
 
+beautifulsoup4
