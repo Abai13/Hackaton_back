@@ -80,27 +80,8 @@ class FavoritesSerializer(serializers.ModelSerializer):
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
-        fields = '__all__'
+        fields = ['author', 'product', 'like']
 
-    def validate(self, attrs):
-        attrs['author'] = self.context.get('request').user
-        return super().validate(attrs)
-
-    def create(self, validated_data):
-        user = validated_data['']
-        product = validated_data['product']
-        if Like.objects.filter(author=user, product=product):
-            Like.objects.filter(author=user, product=product).delete()
-            validated_data = {}
-            return super().create(validated_data)
-        else:
-            return super().create(validated_data)
-
-    def save(self, **kwargs):
-        try:
-            super().save(**kwargs)
-        except IntegrityError:
-            print('')
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

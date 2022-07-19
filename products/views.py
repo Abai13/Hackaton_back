@@ -12,12 +12,12 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter 
 
 from .models import Product, CommentRating, Category, Brand, Like, Favorites #Image
-from .serializers import ProductSerializer, ReviewSerializer, BrandSerializer, CategorySerializer , LikeSerializer# FavoritesSerializer #ImageSerializer
+from .serializers import ProductSerializer, ReviewSerializer, BrandSerializer, CategorySerializer # LikeSerializer# FavoritesSerializer #ImageSerializer
 from .permissions import IsAuthor
 
 from products.filters import ProductPriceFilter
 
-@swagger_auto_schema(request_body=ProductSerializer)
+
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -36,6 +36,41 @@ class ProductViewSet(ModelViewSet):
         elif self.action in ['destroy', 'update', 'partial_update', 'create']:
             self.permission_classes = [permissions.IsAdminUser]
         return super().get_permissions()
+    
+    @action(['GET'], detail=True)
+    def like(self, request, pk=None):
+        product = self.get_object()
+        user = request.user
+
+        try:
+            like = Like.objects.filter(product_id=product, author=user)
+            res = not like[0].like
+            if res:
+                like[0].save()
+            else:
+                like.delete()
+            message = 'Like' if like else 'Dislike'
+        except IndexError:
+            Like.objects.create(product_id=product.id, author=user, like=True)
+            message = 'Like'
+        return Response(message, status=200)
+
+    @action(['GET'], detail=True)
+    def favorite(self, request, pk=None):
+        product = self.get_object()
+        user = request.user
+        try:
+            favorites = Favorites.objects.filter(product_id=product, author=user)
+            res = not favorites[0].favorites
+            if res:
+                favorites[0].save()
+            else:
+                favorites.delete()
+            message = 'In favorites' if favorites else 'Not in favorites'
+        except IndexError:
+            Favorites.objects.create(product_id=product.id, author=user, favorites=True)
+            message = 'In favorites'
+        return Response(message, status=200)
 
 
 @swagger_auto_schema(request_body=ReviewSerializer)
@@ -54,12 +89,12 @@ class CommentViewSet(ModelViewSet):
 #     queryset = Image.objects.all()
 #     serializer_class = ImageSerializer
 
-    def get_permissions(self):
-        if self.action in ['list', 'retrieve']:
-            self.permission_classes = [permissions.AllowAny]
-        elif self.action in ['destroy', 'update', 'partial_update', 'create']:
-            self.permission_classes = [permissions.IsAdminUser]
-        return super().get_permissions()
+    # def get_permissions(self):
+    #     if self.action in ['list', 'retrieve']:
+    #         self.permission_classes = [permissions.AllowAny]
+    #     elif self.action in ['destroy', 'update', 'partial_update', 'create']:
+    #         self.permission_classes = [permissions.IsAdminUser]
+    #     return super().get_permissions()
 
 @swagger_auto_schema(request_body=CategorySerializer)
 class CategoryViewSet(ModelViewSet):
@@ -87,10 +122,10 @@ class BrandViewSet(ModelViewSet):
         return super().get_permissions()
 
 
-@swagger_auto_schema(request_body=ProductSerializer)
-class LikeViewSet(ModelViewSet):
-    queryset = Like.objects.all()
-    serializer_class = LikeSerializer
+# @swagger_auto_schema(request_body=ProductSerializer)
+# class LikeViewSet(ModelViewSet):
+#     queryset = Like.objects.all()
+#     serializer_class = LikeSerializer
 
 
 # @swagger_auto_schema(request_body=ProductSerializer)
