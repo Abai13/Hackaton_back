@@ -87,7 +87,7 @@ class LikeSerializer(serializers.ModelSerializer):
         return super().validate(attrs)
 
     def create(self, validated_data):
-        user = validated_data['author']
+        user = validated_data['']
         product = validated_data['product']
         if Like.objects.filter(author=user, product=product):
             Like.objects.filter(author=user, product=product).delete()
