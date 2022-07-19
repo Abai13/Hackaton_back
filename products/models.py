@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from slugify import slugify
 
+from accounts.models import User
+
 
 class Brand(models.Model):
     title = models.CharField(max_length=150)
@@ -126,7 +128,7 @@ class Like(models.Model):
     like = models.BooleanField(default=False, blank=True)
 
     def __str__(self):
-        return f'{self.author.name} liked {self.product}'
+        return f'{self.author} liked {self.product}'
 
     class Meta:
         verbose_name = 'like'
@@ -139,7 +141,7 @@ class Favorites(models.Model):
     favorites = models.BooleanField(default=False, blank=True)
 
     def __str__(self):
-        return f'{self.author.name} favorites {self.product}'
+        return f'{self.author} favorites {self.product}'
 
     class Meta:
         verbose_name = 'Favorite'
