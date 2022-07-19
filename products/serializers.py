@@ -76,7 +76,7 @@ class FavoritesSerializer(serializers.ModelSerializer):
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
-        fields = ['author', 'product', 'like']
+        fields = '__all__'
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -89,5 +89,3 @@ class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
         fields = ['title']
-
- 
