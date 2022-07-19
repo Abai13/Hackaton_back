@@ -1,5 +1,9 @@
 from multiprocessing import context
 from rest_framework import serializers
+from django.db import IntegrityError
+from accounts.models import User
+
+
 
 from .models import Product, CommentRating, Brand, Category, Like, Favorites
 
@@ -78,6 +82,25 @@ class LikeSerializer(serializers.ModelSerializer):
         model = Like
         fields = '__all__'
 
+    def validate(self, attrs):
+        attrs['author'] = self.context.get('request').user
+        return super().validate(attrs)
+
+    def create(self, validated_data):
+        user = validated_data['author']
+        product = validated_data['product']
+        if Like.objects.filter(author=user, product=product):
+            Like.objects.filter(author=user, product=product).delete()
+            validated_data = {}
+            return super().create(validated_data)
+        else:
+            return super().create(validated_data)
+
+    def save(self, **kwargs):
+        try:
+            super().save(**kwargs)
+        except IntegrityError:
+            print('')
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
