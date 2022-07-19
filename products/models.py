@@ -127,8 +127,6 @@ class Like(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='like')
     like = models.BooleanField(default=False, blank=True)
 
-    def __str__(self):
-        return f'{self.author} liked {self.product}'
 
     class Meta:
         verbose_name = 'like'
