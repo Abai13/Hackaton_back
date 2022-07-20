@@ -29,7 +29,7 @@ class RegistrationView(APIView):
         serializer = RegistrationSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             serializer.create()
-            return Response('Регистрация прошла успешна')
+            return Response('Регистрация прошла успешна, код для активации аккаунта выслан вам на почту !')
 
 class ActivationView(APIView):
     
