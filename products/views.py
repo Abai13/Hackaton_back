@@ -12,7 +12,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter 
 
 from .models import Product, CommentRating, Category, Brand, Like, Favorites #Image
-from .serializers import ProductSerializer, ReviewSerializer, BrandSerializer, CategorySerializer # LikeSerializer# FavoritesSerializer #ImageSerializer
+from .serializers import ProductSerializer, ReviewSerializer, BrandSerializer, CategorySerializer, FavoritesSerializer # LikeSerializer# FavoritesSerializer #ImageSerializer
 from .permissions import IsAuthor
 
 from products.filters import ProductPriceFilter
@@ -127,8 +127,7 @@ class BrandViewSet(ModelViewSet):
 #     queryset = Like.objects.all()
 #     serializer_class = LikeSerializer
 
-
-# @swagger_auto_schema(request_body=ProductSerializer)
-# class FavoritesViewSet(ModelViewSet):
-#     queryset = Favorites.objects.all()
-#     serializer_class = FavoritesSerializer
+@action(['GET'], detail=True)
+class FavoritesViewSet(ModelViewSet):
+    queryset = Favorites.objects.all()
+    serializer_class = FavoritesSerializer

@@ -15,3 +15,6 @@ whitenoise
 
 beautifulsoup4
 aiogram
+wheel
+html5lib
+lxml
