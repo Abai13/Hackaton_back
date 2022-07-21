@@ -62,16 +62,16 @@ async def get_weather(message: types.Message):
         await message.reply("\U00002620 Проверьте название города \U00002620")
 
 
+# #функционал для вывода курса валют
+# @dp.message_handler(commands='get_valuet')
+# async def get_valuet(message):
+#     with open('/home/abai/Desktop/shop_shoes/Hackaton_back/telegram/rate.json') as file:
+#         value = json.load(file)
     
-@dp.message_handler(commands='get_valuet')
-async def get_valuet(message):
-    with open('/home/abai/Desktop/shop_shoes/Hackaton_back/telegram/rate.json') as file:
-        value = json.load(file)
-    
-    print(value)
-    for key, val in value.items():
-        l = f'{key}: {val}'
-        await message.reply(l)
+#     print(value)
+#     for key, val in value.items():
+#         l = f'{key}: {val}'
+#         await message.reply(l)
 
 if __name__ == '__main__':
     executor.start_polling(dp)
