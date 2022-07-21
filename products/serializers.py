@@ -75,7 +75,11 @@ class FavoritesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Favorites
         fields = ['author', 'product', 'favorites']
-
+             
+    def to_representation(self, instance):
+            represent = super().to_representation(instance)
+            represent['product'] = f'https://morning-depths-08273.herokuapp.com/{instance.product_id}'
+            return represent
 
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:
