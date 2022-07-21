@@ -1,3 +1,4 @@
+import json
 import requests
 import datetime
 from config import tg_bot_token, open_weather_token
@@ -60,6 +61,17 @@ async def get_weather(message: types.Message):
     except:
         await message.reply("\U00002620 Проверьте название города \U00002620")
 
+
+    
+@dp.message_handler(commands='get_valuet')
+async def get_valuet(message):
+    with open('/home/abai/Desktop/shop_shoes/Hackaton_back/telegram/rate.json') as file:
+        value = json.load(file)
+    
+    print(value)
+    for key, val in value.items():
+        l = f'{key}: {val}'
+        await message.reply(l)
 
 if __name__ == '__main__':
     executor.start_polling(dp)

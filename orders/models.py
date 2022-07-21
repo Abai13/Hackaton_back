@@ -18,7 +18,7 @@ class Order(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     address = models.CharField(max_length=150, blank=True)
     productcs = models.ManyToManyField(Product, through='OrderItems')
-    total_sum = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total_sum = models.PositiveIntegerField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICE, default='open')
 
     def __str__(self) -> str:
