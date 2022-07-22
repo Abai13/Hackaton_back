@@ -1,20 +1,20 @@
-Django==4.0.5
-djangorestframework==3.13.1
-psycopg2-binary==2.9.3
-Pillow==9.1.1
+Django==4.0.5 #сободный фреймворк для веб-приложений на языке Python
+djangorestframework==3.13.1 #это мощный и гибкий инструментарий для создания веб-API
+psycopg2-binary==2.9.3 #адаптер базы данных Python-PostgreSQL
+Pillow==9.1.1 #библиотека обеспечивает обширную поддержку форматов файлов, для быстрого доступа к данным
 
-python-decouple
-django-filter
-djangorestframework_simplejwt
-python-slugify
-drf-yasg
+python-decouple #отделять параметры конфигурации от кода
+django-filter #пользователям фильтровать набор запросов на основе полей модели
+djangorestframework_simplejwt #Simple JWT предоставляет серверную часть аутентификации JSON Web Token для Django
+python-slugify #Приложение Python slugify, которое обрабатывает юникод (dry)
+drf-yasg #Создавайте настоящие спецификации Swagger из API Django Rest Framework
 
-gunicorn
-django-cors-headers
-whitenoise
+gunicorn # это HTTP-сервер с интерфейсом шлюза веб-сервера Python.
+django-cors-headers #это приложение Django для обработки заголовков сервера,совместного использования ресурсов между источниками (CORS).
+whitenoise # позволяет вашему веб-приложению обслуживать свои собственные статические файлы
 
-beautifulsoup4
-aiogram
-wheel
-html5lib
-lxml
+beautifulsoup4 #для извлечения данных из файлов HTML и XML.
+aiogram #фреймворк для Telegram Bot API, с использованием asyncio и aiohttp
+wheel # Встроенный формат пакета для Python
+html5lib #Парсер HTML, основанный на спецификации HTML WHATWG
+lxml #использовании библиотека для обработки XML и HTML

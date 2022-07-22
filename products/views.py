@@ -37,6 +37,7 @@ class ProductViewSet(ModelViewSet):
             self.permission_classes = [permissions.IsAdminUser]
         return super().get_permissions()
     
+    #специальные методы, которые должны быть маршрутизируемыми,пометить с помощью декоратора @action
     @action(['GET'], detail=True)
     def like(self, request, pk=None):
         product = self.get_object()

@@ -13,6 +13,8 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
 
+    # to_representation() Этот фрагмент кода получает текущее представление,
+    #  добавляет к нему like/rating/commets/favorites и возвращает его
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['rating'] = ReviewSerializer(instance.comments.all(), many=True).data
@@ -21,7 +23,7 @@ class ProductSerializer(serializers.ModelSerializer):
         rep['like'] = LikeSerializer(instance.like.all(), many=True).data
         rep['favorites'] = FavoritesSerializer(instance.favorites.all(), many=True).data
         
-        rating = [dict(i)['rating'] for i in rep['rating']]
+        rating = [dict(i)['rating'] for i in rep['rating'] if dict(i)['rating'] is not None]
         like = sum([dict(i)['like'] for i in rep['like']])
         rep['like'] = like
         favorites = sum([dict(i)['favorites'] for i in rep['favorites']])

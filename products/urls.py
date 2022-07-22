@@ -4,6 +4,9 @@ from rest_framework.routers import DefaultRouter
 from .views import ProductViewSet, CommentViewSet, BrandViewSet, CategoryViewSet, FavoritesViewSet # LikeViewSet # FavoritesViewSet
 
 
+# register () - prefix - префикс URL, использующийся с данным набором роутеров.
+# viewset - класс viewset.
+
 router = DefaultRouter()
 router.register('products', ProductViewSet)
 router.register('comments', CommentViewSet)
