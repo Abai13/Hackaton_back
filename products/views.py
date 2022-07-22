@@ -81,7 +81,7 @@ class CommentViewSet(ModelViewSet):
 
     def get_permissions(self):
         if self.action in ['destroy', 'update', 'partial_update']:
-            self.permission_classes = [IsAuthor]
+            self.permission_classes = [permissions.IsAdminUser]
         return super().get_permissions()
 
 # для загрузки большего кол-во изображений
