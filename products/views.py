@@ -56,6 +56,7 @@ class ProductViewSet(ModelViewSet):
             message = 'Like'
         return Response(message, status=200)
 
+
     @action(['GET'], detail=True)
     def favorite(self, request, pk=None):
         product = self.get_object()
@@ -127,6 +128,7 @@ class BrandViewSet(ModelViewSet):
 # class LikeViewSet(ModelViewSet):
 #     queryset = Like.objects.all()
 #     serializer_class = LikeSerializer
+
 
 @action(['GET'], detail=True)
 class FavoritesViewSet(ModelViewSet):
